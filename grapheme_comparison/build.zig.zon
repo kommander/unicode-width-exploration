@@ -1,0 +1,17 @@
+.{
+    .name = .grapheme_example,
+    .version = "0.0.1",
+    .fingerprint = 0x6f49896d2e7ab3de,
+    .minimum_zig_version = "0.14.0",
+    .dependencies = .{
+        .zg = .{
+            .url = "https://codeberg.org/atman/zg/archive/v0.14.1.tar.gz",
+            .hash = "zg-0.14.1-oGqU3IQ_tALZIiBN026_NTaPJqU-Upm8P_C7QED2Rzm8",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src/",
+    },
+}
