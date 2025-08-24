@@ -11,6 +11,13 @@ pub fn build(b: *std.Build) void {
         .target = target,
     });
 
+    // Add uucode dependency
+    const uucode_dep = b.lazyDependency("uucode", .{
+        .target = target,
+        .optimize = optimize,
+        .build_config_path = b.path("src/uucode_config.zig"),
+    });
+
     const exe = b.addExecutable(.{
         .name = "grapheme_example",
         .root_source_file = b.path("src/main.zig"),
@@ -22,6 +29,11 @@ pub fn build(b: *std.Build) void {
     exe.root_module.addImport("code_point", zg_dep.module("code_point"));
     exe.root_module.addImport("Graphemes", zg_dep.module("Graphemes"));
     exe.root_module.addImport("DisplayWidth", zg_dep.module("DisplayWidth"));
+
+    // Import uucode module if available
+    if (uucode_dep) |dep| {
+        exe.root_module.addImport("uucode", dep.module("uucode"));
+    }
 
     b.installArtifact(exe);
 
